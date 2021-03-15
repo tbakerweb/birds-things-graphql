@@ -23,7 +23,6 @@ const BookMutation = {
     bookRemoveById: BookTC.getResolver('removeById'),
     bookRemoveOfakeDatane: BookTC.getResolver('removeOne'),
     bookRemoveMany: BookTC.getResolver('removeMany'),
-    bookCreateOne: BookTC.getResolver('book'),
 };
 
 // Export the Book Query and Mutations

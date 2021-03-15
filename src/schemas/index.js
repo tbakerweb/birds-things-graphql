@@ -3,22 +3,22 @@ const { SchemaComposer } = require('graphql-compose');
 
 const schemaComposer = new SchemaComposer();
 
-const { UserQuery, UserMutation } = require('./user');
+// const { UserQuery, UserMutation } = require('./user');
 // const { BookQuery, BookMutation } = require('./book');
-// const { BalanceQuery, BalanceMutation } = require('./balance');
+const { CurrencyBalanceQuery, CurrencyBalanceMutation } = require('./currency-balance');
 
 // Create the Queries
 schemaComposer.Query.addFields({
-    ...UserQuery,
+    // ...UserQuery,
     // ...BookQuery,
-    // ...BalanceQuery,
+    ...CurrencyBalanceQuery,
 });
 
 // Create the Mutations
 schemaComposer.Mutation.addFields({
-    ...UserMutation,
+    // ...UserMutation,
     // ...BookMutation,
-    // ...BalanceMutation,
+    ...CurrencyBalanceMutation,
 });
 
 // Export the Schemas

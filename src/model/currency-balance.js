@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { composeWithMongoose } = require('graphql-compose-mongoose');
 const Schema = mongoose.Schema;
 
-const BalanceSchema = new Schema(
+const CurrencyBalanceSchema = new Schema(
     {
         asset: String,
         assetId: String,
@@ -12,13 +12,12 @@ const BalanceSchema = new Schema(
         locked: String,
         total: String,
         usdValue: Number,
-
     },
     {timestamps: { createdAt: 'created_at', updatedAt: 'updated_at'}}
 );
 
 // Export the Schema Module
 module.exports = {
-    BalanceSchema: mongoose.model('balances',BalanceSchema),
-    BalanceTC: composeWithMongoose(mongoose.model('balances', BalanceSchema)),
+    CurrencyBalanceSchema: mongoose.model('currencyBalances',CurrencyBalanceSchema),
+    CurrencyBalanceTC: composeWithMongoose(mongoose.model('currency_balances', CurrencyBalanceSchema)),
 };
