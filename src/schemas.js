@@ -7,19 +7,34 @@ const schemaComposer = new SchemaComposer();
 // const { BookQuery, BookMutation } = require('./book');
 // const { CurrencyBalanceQuery, CurrencyBalanceMutation } = require('../modules/tony/schemas/currency-balance');
 const { CurrencyBalanceQuery, CurrencyBalanceMutation } = require('./modules/tony/schemas/currency-balance');
+const { CurrencyBalanceQuery, CurrencyBalanceMutation } = require('./currency-balance');
+const { BalanceQuery, BalanceMutation } = require('./zenbot-balance');
+const { ExchangeProductQuery, ExchangeProductMutation } = require('./zenbot-exchange-product');
+const { MyTradeQuery, MyTradeMutation } = require('./zenbot-my-trade');
+const { PeriodQuery, PeriodMutation } = require('./zenbot-period');
+const { TradeQuery, TradeMutation } = require('./zenbot-trade');
+const { SessionQuery, SessionMutation } = require('./zenbot-session');
 
 // Create the Queries
 schemaComposer.Query.addFields({
-    // ...UserQuery,
-    // ...BookQuery,
     ...CurrencyBalanceQuery,
+    ...BalanceQuery,
+    ...ExchangeProductQuery,
+    ...MyTradeQuery,
+    ...PeriodQuery,
+    ...TradeQuery,
+    ...SessionQuery,
 });
 
 // Create the Mutations
 schemaComposer.Mutation.addFields({
-    // ...UserMutation,
-    // ...BookMutation,
     ...CurrencyBalanceMutation,
+    ...BalanceMutation,
+    ...ExchangeProductMutation,
+    ...MyTradeMutation,
+    ...PeriodMutation,
+    ...TradeMutation,
+    ...SessionMutation,
 });
 
 // Export the Schemas
