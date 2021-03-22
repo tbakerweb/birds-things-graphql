@@ -1,6 +1,6 @@
 
 
-const { TradeTC } = require('../model/zenbot-trades');
+const { TradeTC } = require('../model/zenbot-trade');
 
 // Create a   Query
 const TradeQuery = {
