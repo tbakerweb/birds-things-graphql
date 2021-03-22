@@ -5,7 +5,8 @@ const schemaComposer = new SchemaComposer();
 
 // const { UserQuery, UserMutation } = require('./user');
 // const { BookQuery, BookMutation } = require('./book');
-const { CurrencyBalanceQuery, CurrencyBalanceMutation } = require('./currency-balance');
+// const { CurrencyBalanceQuery, CurrencyBalanceMutation } = require('../modules/tony/schemas/currency-balance');
+const { CurrencyBalanceQuery, CurrencyBalanceMutation } = require('./modules/tony/schemas/currency-balance');
 
 // Create the Queries
 schemaComposer.Query.addFields({

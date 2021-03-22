@@ -11,33 +11,51 @@ const extensions = ({ context }) => {
 
 // Create the App Engine
 const app = express();
+const app_port = 5000;
+// Add Extensions to the app
 app.use(cors());
 app.use(logger);
 
-// // Configure Application Header and configuration
-// app.use(function (req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-//   // res.setHeader('Access-Control-Allow-Credentials', false);
-//   next();
-// });
 
-app.listen(5000, async () => {
-  await mongoose.connect("mongodb://192.168.1.5:27017/zenbot4", {
+
+// Start the app, which connects to the DB
+app.listen(app_port, async () => {
+
+  // Connect to the Zenbot GraphQL
+  zenbotGql = await mongoose.createConnection("mongodb://192.168.1.5:27017/zenbot4", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  console.log("GraphQL Server is running on port:", 5000);
+  zenbotGql.on(
+    "error",
+    console.error.bind(console, "Zenbot MongoDB connection error:")
+  );
+  
+  // Connect to the Birds-Things GraphQL
+  birdsthingsGql = await mongoose.createConnection("mongodb://192.168.1.5:27017/birdsthings", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  birdsthingsGql.on(
+    "error",
+    console.error.bind(console, "Zenbot MongoDB connection error:")
+  );
+
+  // GraphQL Loaded
+  console.log('GraphQL Loaded');
+  console.log('Running GraphQL on port: ' + app_port);
 });
 
-mongoose.connection.on(
-  "error",
-  console.error.bind(console, "MongoDB connection error:")
-);
-const graphqlSchema = require("./schemas/index");
+// Create an Error Handler for the MongoDB Connections
+
+// Import the Schemas
+const graphqlSchema = require("./schemas");
+
+// Register the GraphQL Path
 app.use(
-  "/graphql",
+  '/graphql',
+
+  // Assign the graphQL HTTP handler as the Route Handler
   graphqlHTTP((request) => {
     return {
       context: { startTime: Date.now() },
