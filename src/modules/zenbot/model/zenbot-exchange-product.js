@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { composeWithMongoose } = require('graphql-compose-mongoose');
 const Schema = mongoose.Schema;
+const zenbotDb = mongoose.createConnection('mongodb://192.168.1.5:27017/zenbot4');
 
 const ExchangeProductSchema = new Schema(
     {
@@ -16,6 +17,6 @@ const ExchangeProductSchema = new Schema(
 
 // Export the Schema Module
 module.exports = {
-    ExchangeProductSchema: mongoose.model('exchangeProducts',ExchangeProductSchema),
-    ExchangeProductTC: composeWithMongoose(mongoose.model('exchange_products', ExchangeProductSchema)),
+    ExchangeProductSchema: zenbotDb.model('exchangeProducts',ExchangeProductSchema),
+    ExchangeProductTC: composeWithMongoose(zenbotDb.model('exchange_products', ExchangeProductSchema)),
 };

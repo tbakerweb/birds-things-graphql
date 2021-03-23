@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { composeWithMongoose } = require('graphql-compose-mongoose');
 const Schema = mongoose.Schema;
+const zenbotDb = mongoose.createConnection('mongodb://192.168.1.5:27017/zenbot4');
 
 const PeriodSchema = new Schema(
     {
@@ -40,6 +41,6 @@ const PeriodSchema = new Schema(
 
 // Export the Schema Module
 module.exports = {
-    PeriodSchema: mongoose.model('periods',PeriodSchema),
-    PeriodTC: composeWithMongoose(mongoose.model('periods', PeriodSchema)),
+    PeriodSchema: zenbotDb.model('periods',PeriodSchema),
+    PeriodTC: composeWithMongoose(zenbotDb.model('periods', PeriodSchema)),
 };

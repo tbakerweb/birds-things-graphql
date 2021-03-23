@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { composeWithMongoose } = require('graphql-compose-mongoose');
 const Schema = mongoose.Schema;
+const tonyDb = mongoose.createConnection('mongodb://192.168.1.5:27017/zenbot4');
 
 const CurrencyBalanceSchema = new Schema(
     {
@@ -18,6 +19,6 @@ const CurrencyBalanceSchema = new Schema(
 
 // Export the Schema Module
 module.exports = {
-    CurrencyBalanceSchema: mongoose.model('currencyBalances',CurrencyBalanceSchema),
-    CurrencyBalanceTC: composeWithMongoose(mongoose.model('currency_balances', CurrencyBalanceSchema)),
+    CurrencyBalanceSchema: tonyDb.model('currencyBalances',CurrencyBalanceSchema),
+    CurrencyBalanceTC: composeWithMongoose(tonyDb.model('currency_balances', CurrencyBalanceSchema)),
 };

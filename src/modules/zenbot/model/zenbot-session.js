@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { composeWithMongoose } = require('graphql-compose-mongoose');
 const Schema = mongoose.Schema;
+const zenbotDb = mongoose.createConnection('mongodb://192.168.1.5:27017/zenbot4');
 
 const SessionSchema = new Schema(
     {
@@ -23,6 +24,6 @@ const SessionSchema = new Schema(
 
 // Export the Schema Module
 module.exports = {
-    SessionSchema: mongoose.model('Sessions',SessionSchema),
-    SessionTC: composeWithMongoose(mongoose.model('sessions', SessionSchema)),
+    SessionSchema: zenbotDb.model('Sessions',SessionSchema),
+    SessionTC: composeWithMongoose(zenbotDb.model('sessions', SessionSchema)),
 };

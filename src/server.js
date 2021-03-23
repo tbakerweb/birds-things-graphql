@@ -3,6 +3,13 @@ const cors = require('cors')
 const mongoose = require("mongoose");
 const { graphqlHTTP } = require("express-graphql");
 const logger = require("./core/logger");
+
+// import express from 'express';
+// import cors from 'cors';
+// import mongoose from 'mongoose';
+// import { graphqlHTTP } from 'express-graphql';
+// import logger from './core/logger';
+
 const extensions = ({ context }) => {
   return {
     runTime: Date.now() - context.startTime,
@@ -21,6 +28,8 @@ app.use(logger);
 // Start the app, which connects to the DB
 app.listen(app_port, async () => {
 
+  // const demoMongoose = require('./modules/demo/demo-db');
+
   // Connect to the Zenbot GraphQL
   zenbotGql = await mongoose.createConnection("mongodb://192.168.1.5:27017/zenbot4", {
     useNewUrlParser: true,
@@ -30,7 +39,7 @@ app.listen(app_port, async () => {
     "error",
     console.error.bind(console, "Zenbot MongoDB connection error:")
   );
-  
+
   // Connect to the Birds-Things GraphQL
   birdsthingsGql = await mongoose.createConnection("mongodb://192.168.1.5:27017/birdsthings", {
     useNewUrlParser: true,
@@ -45,8 +54,6 @@ app.listen(app_port, async () => {
   console.log('GraphQL Loaded');
   console.log('Running GraphQL on port: ' + app_port);
 });
-
-// Create an Error Handler for the MongoDB Connections
 
 // Import the Schemas
 const graphqlSchema = require("./schemas");
